@@ -27,7 +27,6 @@ module SecretTaskApp
     config.generators do |g|
       g.skip_routes true
       g.helper false
-      g.test_framework nil
     end
   end
 end
