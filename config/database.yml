@@ -87,9 +87,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: secret_task_app_production
-    username: secret_task_app
-    password: <%= ENV["SECRET_TASK_APP_DATABASE_PASSWORD"] %>
+    url: <%= ENV.fetch("DATABASE_URL", "") %>
   cache:
     <<: *primary_production
     database: secret_task_app_production_cache
