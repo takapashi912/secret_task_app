@@ -5,7 +5,7 @@
     <nav class="flex items-center gap-4 text-sm">
       <% if user_signed_in? %>
         <span class="text-gray-700">
-          <%= current_user.name.presence || current_user.email %> さん
+          <%= current_user.name %> さん
         </span>
         <%= link_to "タスク一覧", "#", class: "text-gray-700 hover:text-indigo-600" %>
         <%= link_to "タスク作成", "#", class: "text-gray-700 hover:text-indigo-600" %>
