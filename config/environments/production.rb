@@ -57,8 +57,8 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { 
-    host: "https://secret-task-app.onrender.com"
+  config.action_mailer.default_url_options = {
+    host: "https://secret-task-app.onrender.com",
     protocol: "https"
   }
 
