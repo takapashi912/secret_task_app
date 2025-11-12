@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+QuestionTemplate.create!([
+  { body: "学生時代にやらかした黒歴史は？" },
+  { body: "初恋の相手はどんな人？" },
+  { body: "人生で一番恥ずかしかった瞬間は？" }
+])
