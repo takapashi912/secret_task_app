@@ -7,8 +7,8 @@
         <span class="text-gray-700">
           <%= current_user.name %> さん
         </span>
-        <%= link_to "タスク一覧", "#", class: "text-gray-700 hover:text-indigo-600" %>
-        <%= link_to "タスク作成", "#", class: "text-gray-700 hover:text-indigo-600" %>
+        <%= link_to "タスク一覧", tasks_path, class: "text-gray-700 hover:text-indigo-600" %>
+        <%= link_to "タスク作成", new_task_path, class: "text-gray-700 hover:text-indigo-600" %>
         <%= button_to "ログアウト",
                 destroy_user_session_path,
                 method: :delete,
