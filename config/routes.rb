@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "home#index"
   get "home/index"
 
-  resources :tasks, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :tasks, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
   get "up", to: proc { [ 200, {}, [ "OK" ] ] }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
