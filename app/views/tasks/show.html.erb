@@ -13,10 +13,17 @@
     </div>
 
     <% if @task.question_template_id.present? %>
-        <div>
-        <div class="text-sm text-gray-500">テンプレ</div>
+      <div>
+        <div class="text-sm text-gray-500">テンプレの質問</div>
         <div><%= @task.question_template&.body %></div>
-        </div>
+      </div>
+    <% end %>
+
+    <% if @task.secret_post.present? %>
+      <div>
+        <div class="text-sm text-gray-500">公開される秘密</div>
+        <div><%= @task.secret_post&.content %></div>
+      </div>
     <% end %>
 
     <div>
@@ -38,7 +45,7 @@
 
     <%= button_to "削除", task_path(@task),
         method: :delete,
-        data: { turbo_confirm: "本当に削除しますか？" },
+        onclick: "return confirm('本当に削除しますか？');",
         class: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" %>
 
     </div>
