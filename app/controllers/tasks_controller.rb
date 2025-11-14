@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks.order(due_at: :asc)
   end
+
   def show
   end
 
@@ -15,6 +16,11 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
+      SecretPost.create!(
+      task: @task,
+      user: current_user,
+      content: @task.secret_content
+      )
       redirect_to tasks_path, notice: "タスクを作成しました。"
     else
       flash.now[:error] = @task.errors.full_messages.join(", ")
@@ -23,10 +29,14 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task.secret_content = @task.secret_post.content
   end
 
   def update
     if @task.update(task_params)
+      @task.secret_post.update!(
+      content: @task.secret_content
+      )
       redirect_to @task, notice: "タスクを更新しました。"
     else
       flash.now[:error] = @task.errors.full_messages.join(", ")
@@ -35,7 +45,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
+    @task.destroy!
     redirect_to tasks_path, notice: "タスクを削除しました。"
   end
 
@@ -46,6 +56,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :due_at, :question_template_id)
+    params.require(:task).permit(:title, :due_at, :question_template_id, :secret_content)
   end
 end
