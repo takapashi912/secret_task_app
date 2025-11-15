@@ -8,8 +8,14 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-QuestionTemplate.create!([
-  { body: "学生時代にやらかした黒歴史は？" },
-  { body: "初恋の相手はどんな人？" },
-  { body: "人生で一番恥ずかしかった瞬間は？" }
-])
+question_bodies = [
+  "学生時代にやらかした黒歴史は？" ,
+  "初恋の相手はどんな人？" ,
+  "人生で一番恥ずかしかった瞬間は？",
+  "職場でやらかしてしまった、今なら笑える失敗は？"
+]
+
+question_bodies.each do |body|
+  # 同じ body があれば作らない（デプロイのたびに重複しないように）
+  QuestionTemplate.find_or_create_by!(body: body)
+end

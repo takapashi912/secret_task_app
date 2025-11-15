@@ -42,6 +42,11 @@ ja:
       secret_post:
         content: 秘密の内容
 
+  helpers:
+    submit:
+      create: 登録
+      update: 更新
+
   errors:
     messages:
       blank: を入力してください
