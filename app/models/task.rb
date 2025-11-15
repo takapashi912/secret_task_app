@@ -9,7 +9,7 @@ class Task < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :due_at, presence: true
-  validates :secret_content, presence: true
+  validates :secret_content, presence: true, on: :create
 
   scope :overdue,  -> { pending.where("due_at < ?", Time.current) }
 end

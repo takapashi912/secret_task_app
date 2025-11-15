@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_task, only: [ :show, :edit, :update, :destroy, :complete, :not_complete ]
+  before_action :update_overdue_tasks, only: [ :index ]
 
   def index
     @tasks = current_user.tasks.order(due_at: :asc)
@@ -34,7 +35,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      @task.secret_post.update!(
+      @task.secret_post.update(
       content: @task.secret_content
       )
       redirect_to @task, notice: "タスクを更新しました。"
@@ -49,6 +50,22 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: "タスクを削除しました。"
   end
 
+  def complete
+    if @task.update(status: :completed)
+      redirect_to @task, notice: "タスクを達成にしました。"
+    else
+      redirect_back fallback_location: task_path(@task), alert: "ステータス変更に失敗しました。"
+    end
+  end
+
+  def not_complete
+    if @task.update(status: :not_completed)
+      redirect_back fallback_location: task_path(@task), notice: "タスクを未達成にしました。"
+    else
+      redirect_back fallback_location: task_path(@task), alert: "ステータス変更に失敗しました。"
+    end
+  end
+
   private
 
   def set_task
@@ -57,5 +74,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :due_at, :question_template_id, :secret_content)
+  end
+
+  def update_overdue_tasks
+    current_user.tasks.overdue.update_all(status: :not_completed, updated_at: Time.current)
   end
 end
