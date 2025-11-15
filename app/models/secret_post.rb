@@ -4,5 +4,5 @@ class SecretPost < ApplicationRecord
 
   validates :content, presence: true
 
-  scope :published, -> {joins(:task).merge(Task.not_completed)}
+  scope :published, -> { joins(:task).merge(Task.not_completed) }
 end
