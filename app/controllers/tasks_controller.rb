@@ -24,7 +24,7 @@ class TasksController < ApplicationController
       )
       redirect_to tasks_path, notice: "タスクを作成しました。"
     else
-      flash.now[:error] = @task.errors.full_messages.join(", ")
+      flash.now[:error] =  "タスクの作成に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
       )
       redirect_to @task, notice: "タスクを更新しました。"
     else
-      flash.now[:error] = @task.errors.full_messages.join(", ")
+      flash.now[:error] = "タスクの更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end
