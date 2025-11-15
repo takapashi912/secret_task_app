@@ -1,6 +1,6 @@
 
   <% @tasks.each do |task| %>
-    <div class="p-4 flex items-center gap-4 bg-gray-50 rounded-xl shadow divide-y mx-10 my-2">
+    <div class="p-2 flex items-center gap-4 bg-gray-50 rounded-xl shadow divide-y mx-10 my-2">
       <div class="flex-1">
         <div class="font-medium"><%= task.title %></div>
         <div class="text-sm text-gray-600">
@@ -14,8 +14,17 @@
             ・公開される秘密: <%= task.secret_post.content %>
           <% end %>
         </div>
-        <div class="p-4 flex items-center gap-4">
-          <div class="flex-1"></div>
+        <div class="pt-2 flex items-center gap-4">
+          <div class="flex-1">
+            <span class="text-xs px-2 py-1 rounded
+              <%= case task.status
+                  when "pending" then "bg-yellow-100 text-yellow-800"
+                  when "completed" then "bg-green-100 text-green-800"
+                  else "bg-red-100 text-red-800"
+                  end %>">
+              <%= task.status_i18n %>
+            </span>
+          </div>
           <% if task&.pending? %>
             <%= button_to "達成にする", complete_task_path(task),
               method: :patch,
@@ -38,14 +47,7 @@
         </div>
       </div>
 
-      <span class="text-xs px-2 py-1 rounded
-        <%= case task.status
-             when "pending" then "bg-yellow-100 text-yellow-800"
-             when "completed" then "bg-green-100 text-green-800"
-             else "bg-red-100 text-red-800"
-           end %>">
-        <%= task.status %>
-      </span>
+      
     </div>
   <% end %>
 

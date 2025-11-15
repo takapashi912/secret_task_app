@@ -13,3 +13,41 @@ ja:
       default: "%Y年%m月%d日 (%a) %H時%M分"
       long: "%Y年%m月%d日 (%a) %H時%M分"
       short: "%m/%d %H:%M"
+
+  enums:
+    task:
+      status:
+        pending: "未実行"
+        completed: "達成"
+        not_completed: "未達成"
+
+  activerecord:
+    models:
+      user: ユーザー
+      task: タスク
+      secret_post: 秘密
+      question_template: 質問テンプレート
+
+    attributes:
+      user:
+        name: ユーザーネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      task:
+        title: タスク名
+        due_at: 期限
+        status: ステータス
+        secret_content: 秘密の内容
+      secret_post:
+        content: 秘密の内容
+
+  errors:
+    messages:
+      blank: を入力してください
+      taken: はすでに存在しています
+      too_short: は%{count}文字以上で入力してください
+      too_long: は%{count}文字以内で入力してください
+      invalid: が不正な値です
+      confirmation: が一致しません
+      not_saved: 登録に失敗しました
