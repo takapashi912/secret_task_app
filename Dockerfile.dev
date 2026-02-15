@@ -1,4 +1,4 @@
-FROM ruby:3.2.3
+FROM ruby:3.3.6
 
 # 基本パッケージ（postgresに接続・native gem・JS系）
 RUN apt-get update -qq && apt-get install -y \
